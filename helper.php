@@ -56,6 +56,18 @@ function wpa_valid_email($address)
 // check an email address is possibly valid
 return eregi('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$', $address);
 }
+// helper function to validate Phone
+function wpa_valid_phone($phone_valid)
+{
+// check an phome is possibly valid
+return eregi('[0-9]{5,16}', $phone_valid);
+}
+// helper function to validate Credit card
+function wpa_valid_cnaber($cnamber_valid)
+{
+// check an email address is possibly valid
+return eregi('[0-9]{13,16}', $cnamber_valid);
+}
 
 function wpa_import_photo( $auctionid, $url ) {
 

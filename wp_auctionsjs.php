@@ -294,8 +294,8 @@ function ajax_submit_bid() {
    // retreive form values
    var auction_id = jQuery("input#formauctionid").val(); 
    var bidder_name = jQuery("input#Name").val();
-   //var bidder_phone = jQuery("input#Phone").val();
-   //var bidder_cnumber = jQuery("input#Card_number").val();
+   var bidder_phone = jQuery("input#Phone").val();
+   var bidder_cnumber = jQuery("input#Card_number").val();
    var bidder_email = jQuery("input#Email").val();
    var bidder_url = jQuery("input#URL").val();
    var max_bid = jQuery("input#BidAmount").val();
@@ -308,8 +308,8 @@ function ajax_submit_bid() {
       data : {
          auction_id     : auction_id,
          bidder_name    : bidder_name,
-     //    bidder_phone   : bidder_phone,
-     //    bidder_cnumber : bidder_cnumber,
+         bidder_phone   : bidder_phone,
+         bidder_cnumber : bidder_cnumber,
          bidder_email   : bidder_email,
          bidder_url     : bidder_url,
          max_bid        : max_bid,

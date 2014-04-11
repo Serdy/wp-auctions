@@ -79,10 +79,11 @@ if (strstr($_SERVER['PHP_SELF'],PLUGIN_EXTERNAL_PATH.PLUGIN_NAME) && isset($_GET
 	$bidder_url = esc_html(strip_tags(stripslashes($_POST['bidder_url'])));
 	$max_bid = $_POST['max_bid'];
 
-  $result = wpa_process_bid( $auction_id, $bidder_name, $bidder_email, $bidder_url, $max_bid );
+  $result = wpa_process_bid( $auction_id, $bidder_name, $bidder_phone, $bidder_cnumber, $bidder_email, $bidder_url, $max_bid );
 //подтверждение 
-    echo "$result</br>";
-    echo $bidder_phone;
+    echo $result;
+
+
 	exit;
 endif;
 
@@ -281,7 +282,7 @@ endif;
 //---------------------------------------------------
 
 
-function wpa_process_bid( $auction_id, $bidder_name, $bidder_email, $bidder_url, $max_bid ) {
+function wpa_process_bid( $auction_id, $bidder_name, $bidder_phone, $bidder_cnumber, $bidder_email, $bidder_url, $max_bid ) {
 
 	global $wpdb;
 
@@ -298,6 +299,20 @@ function wpa_process_bid( $auction_id, $bidder_name, $bidder_email, $bidder_url,
 		$result = __('Invalid Auction ID specified','WPAuctions');
     elseif (trim($bidder_name == '')):  // Bidder name not specified
         $result = __('Bidder name not supplied','WPAuctions');
+    
+
+    elseif (trim($bidder_phone == '')):  // Bidder name not specified
+        $result = __('Bidder Phone not supplied','WPAuctions');
+    elseif (!wpa_valid_phone($bidder_phone)):  // Bidder email not specified
+        $result = __('Please supply a valid Phone number','WPAuctions');
+    elseif (trim($bidder_cnumber == '')):  // Bidder name not specified
+        $result = __('Bidder Card number not supplied','WPAuctions');
+    elseif (!wpa_valid_cnaber($bidder_cnumber)):  // Bidder email not specified
+        $result = __('Please supply a valid Card number','WPAuctions');    
+
+
+
+
     elseif (trim($bidder_email == '')):  // Bidder email not specified
         $result = __('Bidder email not supplied','WPAuctions');
     elseif (!wpa_valid_email($bidder_email)):  // Bidder email not specified
