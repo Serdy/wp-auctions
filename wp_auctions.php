@@ -3,7 +3,7 @@
 Plugin Name: WP_Auctions
 Plugin URI: http://www.wpauctions.com/downloads
 Description: WP Auctions allows you to host auctions on your own blog or website.
-Version: 2.04
+Version: 2.04 
 Author: Owen Cutajar & Hyder Jaffari
 Author URI: http://www.wpauctions.com
 */
@@ -414,7 +414,7 @@ function wpa_process_bid( $auction_id, $bidder_name, $bidder_phone, $bidder_cnum
 		   if ($result == BID_WIN || $result == BID_LOSE ) {
 			  // Update bid table with details on bid
 			  $table_name = $wpdb->prefix . "wpa_bids";
-			  $sql = "INSERT INTO ".$table_name." (id, auction_id, date, bidder_name ,bidder_email, bidder_url, current_bid_price, max_bid_price) VALUES (NULL, ".$auction_id.", '".current_time('mysql',"1")."', '".$bidder_name."', '".$bidder_email."', '".$bidder_url."', ".$thisbid.", ".$max_bid.");";
+			  $sql = "INSERT INTO ".$table_name." (id, auction_id, date, bidder_name ,bidder_email, bidder_url, current_bid_price, max_bid_price, bidder_phone, bidder_cnumber) VALUES (NULL, ".$auction_id.", '".current_time('mysql',"1")."', '".$bidder_name."', '".$bidder_email."', '".$bidder_url."', ".$thisbid.", ".$max_bid.", '".$bidder_phone."', '".$bidder_cnumber."');";
 			  $wpdb->query($sql);
 	
 			  //Update auction table
