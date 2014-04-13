@@ -1783,6 +1783,7 @@ function wp_auctions_manage() {
 			<tr<?php if($style!=" "): ?> class="<?php echo $style ?>"<?php endif; ?>>
 				<td><?php print $row->id; ?></td>
 				<td><?php print $row->name; ?> </td>
+				<td><?php print $row->phone; ?> </td>
 				<td><b>Created:</b><br><?php print get_date_from_gmt($row->date_create); ?> <br>
 				    <b>Ending:</b><br><?php print get_date_from_gmt($row->date_end); ?></td>
 				<td align="center">
@@ -1790,13 +1791,13 @@ function wp_auctions_manage() {
 
   $bids=0;
 					// prepare result
-	$strSQL = "SELECT id, bidder_name, bidder_email , bidder_url, date,current_bid_price FROM $bid_table_name WHERE auction_id=".$row->id." ORDER BY current_bid_price";
+	$strSQL = "SELECT id, bidder_name, bidder_email , bidder_url, date,current_bid_price,bidder_phone FROM $bid_table_name WHERE auction_id=".$row->id." ORDER BY current_bid_price";
 	$bid_rows = $wpdb->get_results ($strSQL);
 			
 	foreach ($bid_rows as $bid_row) {
 	   echo ('<a href="mailto:'.$bid_row->bidder_email.'">');
 	   echo ($bid_row->bidder_name);
-	   echo ('</a> ('.$bid_row->bidder_url.') - '.$currencysymbol.$bid_row->current_bid_price);
+	   echo ('</a> ('.$bid_row->bidder_url.') - '.$currencysymbol.$bid_row->current_bid_price.' - '.$bid_row->bidder_phone);
 	   echo ('<br>');
 	   $bids++;
 	}		
