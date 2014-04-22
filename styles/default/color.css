@@ -105,7 +105,37 @@ width: 78.2%;
 .wp-bidnow-list a { text-decoration: none !important; color: #333 !important; border: none !important; }
 .wp-bidnow-list a:hover { text-decoration: underline !important; }
 
+/*
+
+PAGE LOTS
+
+*/
+#wp-lot-container {
+    width: 125%;
+}
+#wp-lot-date {
+    padding:20px;
+    text-align: center;
+    font-weight:bold;
+}
+#wp-lot-bidcontainerleft {
+    float: left;
+    font-weight:bold;
+}
+
+#wp-lot-image {
+    float: left;
+    padding-right: 15px;
+}
+
+
+
+
+
 /* 
+
+
+
 
 POPUP DEFAULT STYLE
 

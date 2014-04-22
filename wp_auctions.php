@@ -379,13 +379,20 @@ function wpa_process_bid( $auction_id, $bidder_name, $bidder_phone, $bidder_cnum
 				 $headers = "From: " . get_option('admin_email') . "\r\n";
 				 $to      = $current->bidder_email;
 				 $subject = "[".$title."] You have been outbid on ".$rows->name;
-				 $body   = "You have just been outbid on an auction on " . get_option('blogname') . "\n\n";
-				 $body  .= "Unfortunately someone else is currently winning ".$rows->name." after placing a bid for ".$currencysymbol.$thisbid.". ";
-				 $body  .= "You're still in time to win the auction, so click the link below and bid again.";
+                 $body   = "Unfortunately you have been outbid on".$rows->name.". ";
+                 $body  .= "The Current Bid for this item is".$currencysymbol.$thisbid.".\n ";
+                 $body  .= "You still have time to bid on this item, Please follow link below to bid. \n";
+                 $body  .= "\n\nLink: " . get_bloginfo('wpurl') ."/lots/?id=".$auction_id;
 
-				 $body 	.= "\n\nLink: " . get_bloginfo('wpurl') ."?auction_to_show=".$auction_id;
+                 $body  .= "\n\n--------------------------------------------\n";
 
-				 $body 	.= "\n\n--------------------------------------------\n";
+				 //$body   = "You have just been outbid on an auction on " . get_option('blogname') . "\n\n";
+				 // $body  .= "Unfortunately someone else is currently winning ".$rows->name." after placing a bid for ".$currencysymbol.$thisbid.". ";
+				 // $body  .= "You're still in time to win the auction, so click the link below and bid again.";
+
+				 // $body 	.= "\n\nLink: " . get_bloginfo('wpurl') ."/lots/?id=".$auction_id;
+
+				 // $body 	.= "\n\n--------------------------------------------\n";
 				
 				 // Send the email.
 				 mail($to, $subject, $body, $headers);
@@ -599,10 +606,25 @@ function check_auction_end($auction_id) {
 	        $headers = "From: " . get_option('admin_email') . "\r\n";
 	       $to      = $bidrows->bidder_email;
 	       $subject = "[".$title."] Auction Closed: ".$auction_id;
-	       $body   = "Congratulations! You have just won the following auction.";
+	       $body     = "Congratulations! You have just won the following auction.";
 	       $body 	.= "\n\nAuction: " . $rows->name . " for " . $currencysymbol . $rows->winning_price;
+           $body    .= "\n\nYour total invoice for this auction is";
+           $premium  = $rows->winning_price * 0.1 ;
+           $hst      = ($premium + $rows->winning_price) * 0.13 ;
+           $total    = $rows->winning_price + $premium + $hst ;
+           $body    .= "\nItem:     ". $currencysymbol . $rows->winning_price ;
+           $body    .= "\nPremium:  ".  $currencysymbol .$premium ;
+           $body    .= "\n*HST:     ". $currencysymbol .$hst ;
+           $body    .= "\nTotal:    ". $currencysymbol .$total ;
+           $body    .= "\n\n*If this item is being shipped outside of Canada, the HST will be waived.";
+           $body    .= "\n\n*If you require shipping, please do not hesitate to contact us for a quote.";
+           $body    .= "\n\nPayments can be made via Cash, Debit Card or Paypal.";
+
+
+
+
 	       
-         $body 	.= "\n\nLink: " . get_bloginfo('wpurl')."?auction_to_show=".$auction_id;
+         $body 	.= "\n\nLink: " . get_bloginfo('wpurl')."/contact-us/";
 				  
 	       switch ($payment_method) {
 	          case "":

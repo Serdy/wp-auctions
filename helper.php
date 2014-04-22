@@ -68,6 +68,14 @@ function wpa_valid_cnaber($cnamber_valid)
 // check an email address is possibly valid
 return eregi('[0-9]{13,16}', $cnamber_valid);
 }
+// helper function to validate id lots
+function wpa_valid_id($id_valid)
+{
+// check an id lots is possibly valid
+//return eregi('[0-9]{5,16}', $id_valid);
+  return preg_match("/^([0-9]{1,8})$/",$id_valid);
+}
+
 
 function wpa_import_photo( $auctionid, $url ) {
 
